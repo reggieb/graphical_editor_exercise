@@ -3,7 +3,11 @@ class GraphicGrid
 
   DEFAULT_CELL = 'O'
 
-  def initialize(columns, rows)
+  def initialize
+    @grid = Array.new
+  end
+
+  def populate(columns, rows)
     @rows = rows.to_i
     @columns = columns.to_i
     @grid = make_grid_of(DEFAULT_CELL)

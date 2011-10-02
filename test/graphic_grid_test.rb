@@ -6,10 +6,11 @@ require 'graphic_grid'
 class GraphicGridTest < Test::Unit::TestCase
 
   def setup
-    @graphic_grid = GraphicGrid.new('4', '3')
+    @graphic_grid = GraphicGrid.new
+    @graphic_grid.populate('4', '3')
   end
 
-  def test_grid_for_new
+  def test_populate
     @expected = [%w{O O O O}, %w{O O O O}, %w{O O O O}]
     assert_grid_matches_expected
   end
@@ -88,7 +89,7 @@ class GraphicGridTest < Test::Unit::TestCase
   end
 
   def change_graphic_grid_to_having_central_box
-    @graphic_grid = GraphicGrid.new('4', '4')
+    @graphic_grid.populate('4', '4')
     @graphic_grid.change_row('2', '3', '2', 'H')
     @graphic_grid.change_row('2', '3', '3', 'H')
   end
