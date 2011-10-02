@@ -34,9 +34,43 @@ class GraphicGridTest < Test::Unit::TestCase
     assert_grid_matches_expected
   end
 
+  def test_change_row
+    @graphic_grid.change_row('1', '3', '1', 'G')
+    @graphic_grid.change_row('2', '3', '2', 'H')
+    @graphic_grid.change_row('1', '4', '3', 'I')
+    @expected = [%w{G G G O}, %w{O H H O}, %w{I I I I}]
+    assert_grid_matches_expected
+  end
+
+  def test_find_touching_cells_with_same_content_when_all_same
+    result = @graphic_grid.find_touching_cells_with_same_content('2', '2')
+    expected = [[true, true, true, true], [true, true, true, true], [true, true, true, true]]
+    assert_equal(expected, result)
+  end
+
+  def test_find_touching_cells_with_same_content_within_box
+    change_graphic_grid_to_having_central_box
+    result = @graphic_grid.find_touching_cells_with_same_content('2', '2')
+    expected = [[nil, false, false, nil], [false, true, true, false], [false, true, true, false], [nil, false, false, nil]]
+    assert_equal(expected, result)
+  end
+
+  def test_find_touching_cells_with_same_content_outside_box
+    change_graphic_grid_to_having_central_box
+    result = @graphic_grid.find_touching_cells_with_same_content('1', '1')
+    expected = [[true, true, true, true], [true, false, false, true], [true, false, false, true], [true, true, true, true]]
+    assert_equal(expected, result)
+  end
+
   private
   def assert_grid_matches_expected
     assert_equal(@expected, @graphic_grid.grid)
+  end
+
+  def change_graphic_grid_to_having_central_box
+    @graphic_grid = GraphicGrid.new('4', '4')
+    @graphic_grid.change_row('2', '3', '2', 'H')
+    @graphic_grid.change_row('2', '3', '3', 'H')
   end
 
 end
