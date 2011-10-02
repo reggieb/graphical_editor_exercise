@@ -1,5 +1,9 @@
 == GraphicalEditorExercise
 
+== Test this solution
+
+ruby graphical_editor_exercise.rb
+
 This is the exercise
 
 == Technical Test
