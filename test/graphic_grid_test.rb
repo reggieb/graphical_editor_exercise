@@ -62,6 +62,26 @@ class GraphicGridTest < Test::Unit::TestCase
     assert_equal(expected, result)
   end
 
+  def test_change_touching_cells_when_all_same
+    @graphic_grid.change_touching_cells('3', '3', 'J')
+    @expected = [%w{J J J J}, %w{J J J J}, %w{J J J J}]
+    assert_grid_matches_expected
+  end
+
+  def test_change_touching_cells_within_box
+    change_graphic_grid_to_having_central_box
+    @graphic_grid.change_touching_cells('2', '2', 'J')
+    @expected = [%w{O O O O}, %w{O J J O}, %w{O J J O}, %w{O O O O}]
+    assert_grid_matches_expected
+  end
+
+  def test_change_touching_cells_outside_box
+    change_graphic_grid_to_having_central_box
+    @graphic_grid.change_touching_cells('1', '1', 'J')
+    @expected = [%w{J J J J}, %w{J H H J}, %w{J H H J}, %w{J J J J}]
+    assert_grid_matches_expected
+  end
+  
   private
   def assert_grid_matches_expected
     assert_equal(@expected, @graphic_grid.grid)

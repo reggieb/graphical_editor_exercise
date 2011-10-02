@@ -34,6 +34,15 @@ class GraphicGrid
     return @touch_grid
   end
 
+  def change_touching_cells(x, y, new_entry)
+    find_touching_cells_with_same_content(x, y)
+    for row in (0..(@rows - 1 )).to_a
+      for column in (0..(@columns - 1)).to_a
+        @grid[row][column] = new_entry if @touch_grid[row][column]
+      end
+    end
+  end
+
 
   private
   def mark_touching(column, row)
