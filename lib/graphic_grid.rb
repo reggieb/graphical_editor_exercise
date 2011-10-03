@@ -14,7 +14,7 @@ class GraphicGrid
   end
 
   def delete
-    @grid = nil
+    initialize
   end
 
   def change_cell(column, row, new_entry)

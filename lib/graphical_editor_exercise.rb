@@ -23,7 +23,11 @@ while input[0,1] != 'X'
   elsif command == 'X'
     exit
   elsif commands.keys.include?(command)
-    graphic_grid.send(commands[command], *elements)
+    begin
+      graphic_grid.send(commands[command], *elements)
+    rescue
+      puts "Error. That use of #{command} is not recognised.\nPlease try again."
+    end
   else
     puts 'Command not recognised'
   end

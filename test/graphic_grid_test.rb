@@ -17,7 +17,8 @@ class GraphicGridTest < Test::Unit::TestCase
 
   def test_delete
     @graphic_grid.delete
-    assert_nil(@graphic_grid.grid)
+    @expected = []
+    assert_grid_matches_expected
   end
 
   def test_change_cell
